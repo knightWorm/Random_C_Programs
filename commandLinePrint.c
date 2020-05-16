@@ -37,8 +37,7 @@ int main(int argv, char * args[]){
 		//printing the data
 		printf("Data: %s\n",args[i]);
 
-
-	}
+	}// end of i forloop
 
 	
 }//end of main
