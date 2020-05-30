@@ -46,7 +46,13 @@ int main( int argv, char * argc[] ){
 
 	}
 	
-	// == 1 because this means that the only thing given in the command line was the name of your excutable in this case it will be ./file. I.e. ./file --> argc[0] = ./file
+	// == 1 because this means that the only thing given in the command 
+	// line was the name of your excutable
+	// in this case it will be: ./file. I.e. ./file --> argc[0] = ./file
+	// NOTE: you do not need to format your loic this way. 
+	// instead of having two function. you can jsut use one that has similar logic inside of it.
+	// simply check the amount of items passed throught the commandline and execute based on that.
+	// if that sounds confusing check my other source file called matrix-creator.c lines 27-35
 	if(argv == 1 ){
 
 		file_handle_no_term();
