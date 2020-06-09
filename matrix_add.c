@@ -55,6 +55,8 @@ void matrix_add(time_t start){
 		exit(0);
 	}
 
+	printf("Checkpoint 1\n");
+
 	// now let's set this up in a way such that the child finishes first
 	if(child == 0){
 		// child process
@@ -69,14 +71,20 @@ void matrix_add(time_t start){
 		exit(0);
 	}
 
+	printf("Checkpoint 2\n");
+
 	//let'sread the first int
 	fscanf(my_file, "%d", &k);
 
 	int i=0;
 
-	// not lets look at the rest with a while loop
+	printf("Checkpoint 3\n");
+
+	int n = 0;
+	// not lets look atthe rest with a while loop
 	while(!feof(my_file)){
 		
+		printf("Checkpoint %d\n",n);
 		counter[i] = k;
 
 		printf("Here is what we have in counter[%d] = %d", i, counter[i]);
@@ -84,11 +92,13 @@ void matrix_add(time_t start){
 		// read the next int 
 		fscanf(my_file, "%d", &k);
 
+		n++;
 		i++;
 
 		fflush(stdout);
 
 	}// end of while
+	printf("Checkpoint 4\n");
 	
 	}else{
 
