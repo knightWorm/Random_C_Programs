@@ -55,7 +55,6 @@ void matrix_add(time_t start){
 		exit(0);
 	}
 
-	printf("Checkpoint 1\n");
 
 	// now let's set this up in a way such that the child finishes first
 	if(child == 0){
@@ -71,23 +70,17 @@ void matrix_add(time_t start){
 		exit(0);
 	}
 
-	printf("Checkpoint 2\n");
-
 	//let'sread the first int
 	fscanf(my_file, "%d", &k);
 
 	int i=0;
 
-	printf("Checkpoint 3\n");
-
 	int n = 0;
+
 	// not lets look atthe rest with a while loop
 	while(!feof(my_file)){
 		
-		printf("Checkpoint %d\n",n);
 		counter[i] = k;
-
-		printf("Here is what we have in counter[%d] = %d", i, counter[i]);
 
 		// read the next int 
 		fscanf(my_file, "%d", &k);
@@ -98,13 +91,27 @@ void matrix_add(time_t start){
 		fflush(stdout);
 
 	}// end of while
-	printf("Checkpoint 4\n");
+
+	// wrtie the data optained form old file to the pipe
+	// firt close fd[0] for reading 
+	close(fd[0]);
+	// no write to fd[1]
+	write(fd[1], counter,16);
 	
 	}else{
 
+		int *counter1;
+
 		waitpid(child, &status, 0);
 
-		printf("I am parent\n");
+		// let's read from the pipe
+		// first close fd[1]
+		close(fd[1]);
+
+		// now read
+		read(fd[0], counter1, 16);
+
+		printf("Data read from child process: %d\n", counter1);
 
 		time_t end = time(NULL);
 		printf("End: %ld \nTotal Time: %ld\n", end, (end - start));
